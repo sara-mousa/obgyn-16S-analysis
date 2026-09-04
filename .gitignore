@@ -5,6 +5,9 @@
 *.fasta
 *.fa
 
+#html files
+*.html
+
 #Taxa database
 1-data/taxa-database/
 
