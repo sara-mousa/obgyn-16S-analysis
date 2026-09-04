@@ -1,0 +1,33 @@
+#Sequencing data
+*.fastq.gz
+
+#Sequence files
+*.fasta
+*.fa
+
+#Taxa database
+1-data/taxa-database/
+
+#Compressed files
+*.zip
+
+#R objects
+*.RData
+
+#RStudio
+.Rproj.user/
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+
+#QC reports
+3-results/qc/fastqc/
+3-results/qc/multiqc/
+
+#Large output files
+*.biom
+3-results/picrust2_out_pipeline/
+
+#macOS
+.DS_Store
