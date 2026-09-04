@@ -176,28 +176,33 @@ length(asv_sequences)
 top20 <- names(sort(taxa_sums(ps), decreasing = TRUE))[1:20]
 
 #Transform absolute read counts to relative abundance
-ps.top20 <- transform_sample_counts(ps, function(OTU) OTU / sum(OTU))
+ps_abun <- transform_sample_counts(ps, function(OTU) OTU / sum(OTU))
 
-#Prune the object down to contain only those top 20 ASVs
-ps.top20 <- prune_taxa(top20, ps.top20)
+#Prune the object down to contain only top 20 ASVs
+ps_top20 <- prune_taxa(top20, ps_abun)
 
-#Generate the bar plot grouping by Sample Type
-ps_df <- psmelt(ps.top20)
+#Melt into a data frame
+ps_df <- psmelt(ps_top20)
+
+#Average the relative abundance for each SampleType
+ps_summary <- ps_df %>%
+  group_by(SampleType, Genus) %>%
+  summarize(Mean_Abundance = mean(Abundance), .groups = "drop")
 
 #Build the plot
-top20_asv <- ggplot(ps_df, aes(x = SampleType, y = Abundance, fill = Genus)) +
+top20_asv <- ggplot(ps_summary, aes(x = SampleType, y = Mean_Abundance, fill = Genus)) +
   geom_bar(stat = "identity", position = "stack") +
+  scale_y_continuous(labels = scales::percent) +
   scale_fill_viridis_d(option = "mako") +
-  labs(x="Sample Type",
-       y="Relative Abundance",
-       title="Top 20 ASVs by Sample Type")
-
+  labs(x = "Sample Type",
+       y = "Mean Relative Abundance",
+       title = "Top 20 ASVs: Genus-Level Relative Abundance")
 
 top20_asv
 
-#save barplot
+#Save barplot
 ggsave(
-  "3-results/DADA2/figures/top20_ASVs.png",
+  "3-results/DADA2/figures/top20_ASVs_Genus.png",
   top20_asv,
   width = 10,
   height = 5,
