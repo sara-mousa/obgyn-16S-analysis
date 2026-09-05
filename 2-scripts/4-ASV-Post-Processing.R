@@ -8,7 +8,7 @@ library(vegan)
 dir.create("3-results/Postprocessing-diversity/figures", recursive = TRUE)
 
 load(file = "3-results/DADA2/phyloseq.RData")
-samdf <- as.data.frame(sample_data(ps))
+samdf <- data.frame(sample_data(ps))
 ##############################################
 #Alpha Diversity: Vaginal vs. Endometrial brushing
 alpha_diversity <- estimate_richness(ps, measures = c("Observed", "Shannon"))
