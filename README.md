@@ -41,9 +41,8 @@ How do microbial composition and diversity differ between two different female r
   6. Taxonomic assignment
   7. Diversity analysis
   8. Differential abundance analysis using ANCOM-BC2
-  9. Functional Prediction using PICRUSt2 
-  10.Differential MetaCyc Pathways analysis
-  11. Data visualization
+  9. Functional Prediction using PICRUSt2
+  10. Data visualization
 
 ---
 
